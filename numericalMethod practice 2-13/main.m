@@ -25,8 +25,11 @@ for ii=1:3
     n=n_perfect_gas(ii);
     k=0;
     while k<=100
+        o=originF(para,n,p(ii));
+        d=differenrial(para,n,p(ii));
+        fprintf('%f\t%f\n',o,d);
         y=n-originF(para,n,p(ii))/differenrial(para,n,p(ii));
-        if abs(y-n)>10^5
+        if abs(y-n)>10^(-5)
             n=y;
             cnt=cnt+1;
             k=k+1;
@@ -43,5 +46,5 @@ end
 dev=100*(n_perfect_gas./(n_final+[1 1 1]));
 %print the result
 for j=1:3
-    fprintf('when p=%.4f, iteration times=%d, n=%.4f, the deviation is %.4f\n',p(j),time(j),n_final(j),dev(ii));
+    fprintf('when p=%f, iteration times=%d, n=%f, the deviation is %.4f\n',p(j),time(j),n_final(j),dev(ii));
 end
